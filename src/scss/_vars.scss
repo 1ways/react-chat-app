@@ -1,0 +1,19 @@
+:root {
+    --bg-color: #f5f7fa;
+    --card-bg: #ffffff;
+    --border-color: #e0e6ed;
+    --text-color: #1e293b;
+    --text-secondary: #64748b;
+    --primary: #3b82f6;
+    --success: #10b981;
+    --error: #ef4444;
+}
+
+$bg-color: var(--bg-color);
+$card-bg: var(--card-bg);
+$border-color: var(--border-color);
+$text-color: var(--text-color);
+$text-secondary: var(--text-secondary);
+$primary: var(--primary);
+$success: var(--success);
+$error: var(--error);
