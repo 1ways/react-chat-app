@@ -2,18 +2,32 @@
     --bg-color: #f5f7fa;
     --card-bg: #ffffff;
     --border-color: #e0e6ed;
+    --border-color-primary: #2563eb;
     --text-color: #1e293b;
     --text-secondary: #64748b;
     --primary: #3b82f6;
+    --primary-ring: rgba(59, 130, 246, 0.2);
     --success: #10b981;
-    --error: #ef4444;
+    --error-bg: #fee2e2;
+    --error-text: #b91c1c;
+    --error-border: #fca5a5;
+    --error-ring: rgba(239, 68, 68, 0.3);
+    --disabled-bg: #D1D5DB;
+    --disabled-text: #9ca3af;
 }
 
 $bg-color: var(--bg-color);
 $card-bg: var(--card-bg);
 $border-color: var(--border-color);
+$border-color-primary: var(--border-color-primary);
 $text-color: var(--text-color);
 $text-secondary: var(--text-secondary);
 $primary: var(--primary);
+$primary-ring: var(--primary-ring);
 $success: var(--success);
-$error: var(--error);
+$error-bg: var(--error-bg);
+$error-text: var(--error-text);
+$error-border: var(--error-border);
+$error-ring: var(--error-ring);
+$disabled-bg: var(--disabled-bg);
+$disabled-text: var(--disabled-text);
