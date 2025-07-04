@@ -19,7 +19,6 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.2",
     "sass": "^1.89.2",
-    "uuid": "^11.1.0",
     "zod": "^3.25.67"
   },
   "devDependencies": {

@@ -1,10 +1,13 @@
 import * as z from "zod/v4"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from '../../firebaseConfig'
-import { equalTo, get, orderByChild, query, ref, set } from 'firebase/database'
+import { child, get, ref } from 'firebase/database'
+import { useDispatch, useSelector } from 'react-redux'
+import { update } from '../state/user/userSlice'
+
 
 const formSchema = z.object({
     email: z.email().min(1, {
@@ -16,6 +19,10 @@ const formSchema = z.object({
 })
 
 export default function LoginPage() {
+    const userState = useSelector(state => state.user.value)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const {
         register,
         handleSubmit,
@@ -33,14 +40,25 @@ export default function LoginPage() {
 
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password)
-            const user = userCredential.user
+            const userId = userCredential.user.uid
 
-            console.log('you have successfully singed in!')
-            console.log(user)
+            const dbRef = ref(db)
+            const snapshot = await get(child(dbRef, `users/${userId}`))
+
+            if (!userState) {
+                dispatch(update(snapshot.val()))
+                navigate('/')
+            }
         } catch (error) {
-            setError('root', {
-                message: error.message
-            })
+            if (error.code === 'auth/invalid-credential') {
+                setError('root', {
+                    message: 'Email or password is wrong'
+                })
+            } else {
+                setError('root', {
+                    message: error.message
+                })
+            }
             console.log(error.code)
         }
     }
