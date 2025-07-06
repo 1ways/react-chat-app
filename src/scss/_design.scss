@@ -181,12 +181,11 @@ button {
     width: 300px;
 
     &__search {
-        padding: 20px 20px 0;
+        padding: 20px;
     }
 
     &__chats {
         overflow-y: auto;
-        margin-top: 20px;
         border-top: 1px solid $border-color;
         display: flex;
         flex-direction: column;
@@ -198,14 +197,10 @@ button {
             cursor: pointer;
             transition: all 0.1s linear;
             outline: none;
-            
-            &:hover {
-                background-color: #E5E7EB;
-            }
-            
+
+            &:hover,
             &:focus {
-                border-radius: 4px;
-                box-shadow: 0 0 0 3px $primary-ring;
+                background-color: #e5e7eb;
             }
         }
 
@@ -259,6 +254,196 @@ button {
 
         &::placeholder {
             color: $text-secondary;
+        }
+    }
+}
+
+.chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &__text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__header {
+        height: 78.6px;
+        border-bottom: 1px solid $border-color;
+        padding: 10px;
+        display: flex;
+
+        &-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            background-color: #af5757;
+            align-self: center;
+        }
+    }
+
+    &__info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 10px;
+
+        &-title {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        &-text {
+            font-size: 14px;
+            color: $text-secondary;
+        }
+    }
+
+    &__more {
+        margin: 10px 0;
+        width: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        background: none;
+        outline: none;
+        border: 1px solid $bg-color;
+        cursor: pointer;
+        transition: all 0.1s linear;
+
+        &:hover {
+            border: 1px solid $border-color;
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 3px $primary-ring;
+        }
+
+        &-dot {
+            display: block;
+            width: 5.3px;
+            height: 5.3px;
+            border-radius: 100%;
+            background: $text-color;
+            transition: all 0.1s linear;
+        }
+    }
+
+    &__body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        &-text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: $text-secondary;
+        }
+
+        &-messages {
+            padding: 10px;
+            overflow-y: scroll;
+            flex: 1;
+            max-height: calc(100vh - 78.6px - 78.4px);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+
+        &-message {
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 0 5px $border-color;
+            padding: 10px;
+            width: fit-content;
+            max-width: 500px;
+            cursor: pointer;
+            transition: all 0.1s linear;
+
+            &-text {
+                font-size: 14px;
+            }
+
+            &-time {
+                margin-top: 5px;
+                font-size: 12px;
+                text-align: right;
+            }
+
+            &--own {
+                align-self: flex-end;
+                background: $primary;
+                color: #fff;
+            }
+
+            &.focus {
+                box-shadow: 0 0 0 3px $primary-ring;
+            }
+        }
+
+        &-textfield {
+            background-color: $bg-color;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-top: 1px solid $border-color;
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 0 5px $border-color;
+        }
+
+        &-input {
+            flex: 1;
+            border-radius: 4px;
+            border: 1px solid $border-color;
+            padding: 10px;
+            transition: all 0.1s linear;
+            color: $text-color;
+
+            &:focus {
+                outline: none;
+                border: 1px solid $border-color-primary;
+                box-shadow: 0 0 0 3px $primary-ring;
+            }
+
+            &::placeholder {
+                color: $text-secondary;
+            }
+        }
+
+        &-btn {
+            border: 1px solid transparent;
+            background-color: transparent;
+            transition: all 0.1s linear;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                border: 1px solid $border-color;
+            }
+
+            &:focus {
+                box-shadow: 0 0 0 3px $primary-ring;
+            }
         }
     }
 }
