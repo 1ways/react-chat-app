@@ -15,6 +15,10 @@ body {
     background: $bg-color;
 }
 
+ul {
+    list-style-type: none;
+}
+
 a {
     color: inherit;
 }
@@ -159,6 +163,102 @@ button {
         &-title {
             font-weight: 500;
             margin-bottom: 20px;
+        }
+    }
+}
+
+.main {
+    display: flex;
+    max-height: 100vh;
+    min-height: 100vh;
+}
+
+.sidebar {
+    border-right: 1px solid $border-color;
+    box-shadow: 0 0 5px $border-color;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+
+    &__search {
+        padding: 20px 20px 0;
+    }
+
+    &__chats {
+        overflow-y: auto;
+        margin-top: 20px;
+        border-top: 1px solid $border-color;
+        display: flex;
+        flex-direction: column;
+
+        &-item {
+            display: flex;
+            gap: 10px;
+            padding: 7.5px 20px;
+            cursor: pointer;
+            transition: all 0.1s linear;
+            outline: none;
+            
+            &:hover {
+                background-color: #E5E7EB;
+            }
+            
+            &:focus {
+                border-radius: 4px;
+                box-shadow: 0 0 0 3px $primary-ring;
+            }
+        }
+
+        &-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            background-color: #af5757;
+        }
+
+        &-content {
+            flex: 1;
+        }
+
+        &-last {
+            font-size: 14px;
+            color: $text-secondary;
+        }
+    }
+
+    &__content {
+        &-top {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &-time {
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+
+    &__input {
+        flex: 1;
+        border-radius: 4px;
+        border: 1px solid $border-color;
+        padding: 10px;
+        transition: all 0.1s linear;
+        color: $text-color;
+
+        &:focus {
+            outline: none;
+            border: 1px solid $border-color-primary;
+            box-shadow: 0 0 0 3px $primary-ring;
+        }
+
+        &::placeholder {
+            color: $text-secondary;
         }
     }
 }
