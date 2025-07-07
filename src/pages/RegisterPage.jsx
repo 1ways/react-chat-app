@@ -59,7 +59,13 @@ export default function RegisterPage() {
 
                 await set(
                     ref(db, `users/${userCredential.user.uid}`),
-                    data
+                    {
+                        uid: userCredential.user.uid,
+                        chats: {
+                            placeholder: true
+                        },
+                        ...data
+                    }
                 )
 
                 navigate('/login')

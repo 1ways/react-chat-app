@@ -184,6 +184,12 @@ button {
         padding: 20px;
     }
 
+    &__text {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
     &__chats {
         overflow-y: auto;
         border-top: 1px solid $border-color;
@@ -192,6 +198,7 @@ button {
 
         &-item {
             display: flex;
+            align-items: center;
             gap: 10px;
             padding: 7.5px 20px;
             cursor: pointer;
@@ -208,7 +215,6 @@ button {
             width: 50px;
             height: 50px;
             border-radius: 100%;
-            background-color: #af5757;
         }
 
         &-content {
@@ -265,10 +271,12 @@ button {
     position: relative;
 
     &__text {
+        font-size: 14px;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        text-align: center;
     }
 
     &__header {
@@ -281,7 +289,6 @@ button {
             width: 50px;
             height: 50px;
             border-radius: 100%;
-            background-color: #af5757;
             align-self: center;
         }
     }

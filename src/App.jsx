@@ -22,7 +22,6 @@ export default function App() {
                 const snapshot = await get(child(dbRef, `users/${user.uid}`))
 
                 if (!userState) {
-                    console.log('state changed')
                     dispatch(update(snapshot.val()))
                 }
             } else {
