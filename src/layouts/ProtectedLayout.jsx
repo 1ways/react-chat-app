@@ -6,7 +6,7 @@ export default function ProtectedLayout() {
     const user = useSelector(state => state.user.value)
 
     if (isLoading) {
-        return <h1>Change to a spinner</h1>
+        return <span className="loader"></span>
     }
 
     return user ? <Outlet /> : <Navigate to='/login' />

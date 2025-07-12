@@ -1,39 +1,65 @@
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import ChatInputField from './ChatInputField'
-import Avatar from 'boring-avatars'
-
+import { setIsLoading } from '../state/chat/chatSlice'
+import { onValue, ref } from 'firebase/database'
+import { db } from '../../firebaseConfig'
+import sortMessagesArray from '../service/sortMessagesArray'
+import ChatMessages from './ChatMessages'
+import ChatHeader from './ChatHeader'
 
 export default function Chat() {
+    const [messages, setMessages] = useState([])
+
     const chatState = useSelector(state => state.chat.value)
+    const isLoading = useSelector(state => state.chat.isLoading)
     const openedUser = useSelector(state => state.chat.openedUser)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!chatState) return
+        setMessages([])
+
+        dispatch(setIsLoading(true))
+
+        const chatMessagesRef = ref(db, `userChats/${chatState}/messages`)
+
+        const unsubscribe = onValue(chatMessagesRef, snapshot => {
+            if (snapshot.exists()) {
+                const sortedArr = sortMessagesArray(snapshot.val())
+                setMessages(sortedArr)
+            } else {
+                setMessages([])
+            }
+            dispatch(setIsLoading(false))
+        })
+
+        return () => {
+            unsubscribe()
+        }
+    }, [chatState])
+
+    if (messages.length === 0 && isLoading) {
+        return (
+            <div className="chat">
+                <span className="loader"></span>
+            </div>
+        )
+    }
 
     return (
         <div className="chat">
             {!chatState ? <p className='chat__text'>Select a chat or search for a user to create one</p>
                 : (
                     <>
-                        <header className="chat__header">
-                            <div className="chat__header-avatar">
-                                <Avatar name={openedUser.uid} size={50} />
-                            </div>
-                            <div className="chat__info">
-                                <h1 className='chat__info-title'>{openedUser.firstName} {openedUser.lastName}</h1>
-                                <p className='chat__info-text'>online</p>
-                            </div>
-                            <button className="chat__more">
-                                <span className="chat__more-dot"></span>
-                                <span className="chat__more-dot"></span>
-                                <span className="chat__more-dot"></span>
-                            </button>
-                        </header>
+                        <ChatHeader openedUser={openedUser} />
                         <div className="chat__body">
-                            <div className="chat__body-messages">
-                                <p className="chat__body-text">Start a conversation</p>
-                            </div>
+                            <ChatMessages messages={messages} openedUser={openedUser} />
                             <ChatInputField />
                         </div>
                     </>
-                )}
-        </div>
+                )
+            }
+        </div >
     )
 }

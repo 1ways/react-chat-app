@@ -12,8 +12,14 @@
     --error-text: #b91c1c;
     --error-border: #fca5a5;
     --error-ring: rgba(239, 68, 68, 0.3);
-    --disabled-bg: #D1D5DB;
+    --disabled-bg: #d1d5db;
     --disabled-text: #9ca3af;
+    --own-message-bg: #d1fae5;
+    --own-message-text: #065f46;
+    --own-message-border: #10b981;
+    --message-bg: #e5e7eb;
+    --message-text: #111827;
+    --message-border: #d1d5db;
 }
 
 $bg-color: var(--bg-color);
@@ -31,3 +37,9 @@ $error-border: var(--error-border);
 $error-ring: var(--error-ring);
 $disabled-bg: var(--disabled-bg);
 $disabled-text: var(--disabled-text);
+$own-message-bg: var(--own-message-bg);
+$own-message-text: var(--own-message-text);
+$own-message-border: var(--own-message-border);
+$message-bg: var(--message-bg);
+$message-text: var(--message-text);
+$message-border: var(--message-border);

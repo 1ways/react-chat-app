@@ -44,6 +44,30 @@ button {
     }
 }
 
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    border: 2px solid $text-secondary;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
 .btn {
     position: relative;
     min-height: 40px;
@@ -361,7 +385,7 @@ button {
 
         &-messages {
             padding: 10px;
-            overflow-y: scroll;
+            overflow-y: auto;
             flex: 1;
             max-height: calc(100vh - 78.6px - 78.4px);
             display: flex;
@@ -372,28 +396,34 @@ button {
 
         &-message {
             border-radius: 4px;
-            background: #fff;
+            background: $message-bg;
             box-shadow: 0 0 5px $border-color;
             padding: 10px;
             width: fit-content;
-            max-width: 500px;
             cursor: pointer;
             transition: all 0.1s linear;
+            display: flex;
+            gap: 20px;
+            color: $message-text;
+            border: 1px solid $message-border;
 
             &-text {
                 font-size: 14px;
+                max-width: 250px;
             }
 
             &-time {
-                margin-top: 5px;
-                font-size: 12px;
-                text-align: right;
+                margin-top: 10px;
+                font-size: 10px;
+                color: $text-secondary;
+                align-self: flex-end;
             }
 
             &--own {
                 align-self: flex-end;
-                background: $primary;
-                color: #fff;
+                background: $own-message-bg;
+                color: $own-message-text;
+                border: 1px solid $own-message-border;
             }
 
             &.focus {

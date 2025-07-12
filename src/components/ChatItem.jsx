@@ -1,9 +1,8 @@
 import Avatar from 'boring-avatars'
-import { get, ref, set, update } from 'firebase/database'
-import { db } from '../../firebaseConfig'
-import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateChat, updateOpenedUser } from '../state/chat/chatSlice'
+import createNewChat from '../service/createNewChat'
+import checkExistingChat from '../service/checkExistingChat'
 
 export default function ChatItem({ item }) {
     const userState = useSelector(state => state.user.value)
@@ -11,31 +10,11 @@ export default function ChatItem({ item }) {
     const dispatch = useDispatch()
 
     async function handleClick() {
-        let chatId = ''
-
         try {
-            const snapshot = await get(ref(db, 'userChats'))
+            let { chatId, found } = await checkExistingChat(userState, item)
 
-            if (snapshot.exists()) {
-                const userChats = snapshot.val()
-                let found = false
-
-                for (const chatKey in userChats) {
-                    const chat = userChats[chatKey]
-                    const users = chat.users
-
-                    if (users[userState.uid] && users[item.uid]) {
-                        found = true
-                        chatId = chatKey
-                        break
-                    }
-                }
-
-                if (!found) {
-                    await createNewChat(uid)
-                }
-            } else {
-                await createNewChat(uid)
+            if (!found) {
+                chatId = await createNewChat(userState, item)
             }
 
             // open the chat
@@ -45,41 +24,20 @@ export default function ChatItem({ item }) {
             }
         } catch (error) {
             console.log(error)
-        }
-    }
-
-    async function createNewChat() {
-        const uid = uuidv4()
-
-        try {
-            await set(
-                ref(db, `userChats/${uid}`),
-                {
-                    uid,
-                    users: {
-                        [item.uid]: true,
-                        [userState.uid]: true
-                    },
-                    messages: {
-                        placeholder: true
-                    }
-                }
-            )
-
-            const updates = {}
-            updates[`users/${userState.uid}/chats/${uid}`] = true
-            updates[`users/${item.uid}/chats/${uid}`] = true
-
-            await update(ref(db), updates)
-        } catch (error) {
-            console.log(error)
+            alert(`Something went wrong: ${error.code}`)
         }
     }
 
     return (
-        <li className="sidebar__chats-item" tabIndex={0} onClick={handleClick}>
+        <li
+            className="sidebar__chats-item"
+            aria-label={`Chat with ${item.firstName} ${item.lastName}`}
+            tabIndex={0}
+            onClick={handleClick}
+            onKeyDown={(e) => { if (e.key === 'Enter') handleClick() }}
+        >
             <div className="sidebar__chats-avatar">
-                <Avatar name={item.uid} size={50} />
+                <Avatar name={`${item.firstName}-${item.uid}`} size={50} />
             </div>
             <div className="sidebar__chats-content">
                 <div className="sidebar__content-top">
