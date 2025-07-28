@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { updateUser } from '../../state/user/userSlice'
 
 export default function SidebarFooter() {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
 
     async function handleSignout() {
