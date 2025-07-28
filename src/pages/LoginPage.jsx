@@ -6,7 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from '../../firebaseConfig'
 import { child, get, ref } from 'firebase/database'
 import { useDispatch, useSelector } from 'react-redux'
-import { update } from '../state/user/userSlice'
+import { updateUser } from '../state/user/userSlice'
 
 
 const formSchema = z.object({
@@ -46,7 +46,7 @@ export default function LoginPage() {
             const snapshot = await get(child(dbRef, `users/${userId}`))
 
             if (!userState) {
-                dispatch(update(snapshot.val()))
+                dispatch(updateUser(snapshot.val()))
                 navigate('/')
             }
         } catch (error) {

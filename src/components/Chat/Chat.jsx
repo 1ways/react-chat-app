@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ChatInputField from './ChatInputField'
-import { setIsLoading } from '../state/chat/chatSlice'
+import { setIsLoading } from '../../state/chat/chatSlice'
 import { onValue, ref } from 'firebase/database'
-import { db } from '../../firebaseConfig'
-import sortMessagesArray from '../service/sortMessagesArray'
+import { db } from '../../../firebaseConfig'
+import sortMessagesArray from '../../service/sortMessagesArray'
 import ChatMessages from './ChatMessages'
 import ChatHeader from './ChatHeader'
 

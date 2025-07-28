@@ -1,8 +1,8 @@
 import { equalTo, get, orderByChild, query, ref } from 'firebase/database'
-import { db } from '../../firebaseConfig'
+import { db } from '../../../firebaseConfig'
 import { useSelector } from 'react-redux'
 
-export default function SearchBar({ setResult, setSearchText, setIsSearching }) {
+export default function SidebarSearchBar({ setResult, setSearchText, setIsSearching }) {
     const userState = useSelector(state => state.user.value)
 
     async function handleChange(e) {

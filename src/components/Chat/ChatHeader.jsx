@@ -1,10 +1,10 @@
-import Avatar from 'boring-avatars'
+import ProfilePicture from '../ProfilePicture'
 
 export default function ChatHeader({ openedUser }) {
     return (
         <header className="chat__header">
             <div className="chat__header-avatar">
-                <Avatar name={`${openedUser.firstName}-${openedUser.uid}`} size={50} />
+                <ProfilePicture user={openedUser} size={50} />
             </div>
             <div className="chat__info">
                 <h1 className='chat__info-title'>{openedUser.firstName} {openedUser.lastName}</h1>

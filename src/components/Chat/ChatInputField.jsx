@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import sendIcon from '../assets/images/send.png'
+import sendIcon from '../../assets/images/send.png'
 import { useSelector } from 'react-redux'
 import { ref, update } from 'firebase/database'
-import { db } from '../../firebaseConfig'
+import { db } from '../../../firebaseConfig'
 import { v4 as uuidv4 } from 'uuid'
 
 export default function ChatInputField() {
@@ -27,9 +27,7 @@ export default function ChatInputField() {
                     [`userChats/${chatState}/messages/${uid}`]: messageData
                 })
 
-                console.log('message sent')
                 inputRef.current.value = ''
-                
             } catch (error) {
                 console.log(error)
             }

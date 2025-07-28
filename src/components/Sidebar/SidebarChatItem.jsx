@@ -1,10 +1,10 @@
-import Avatar from 'boring-avatars'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateChat, updateOpenedUser } from '../state/chat/chatSlice'
-import createNewChat from '../service/createNewChat'
-import checkExistingChat from '../service/checkExistingChat'
+import { updateChat, updateOpenedUser } from '../../state/chat/chatSlice'
+import createNewChat from '../../service/createNewChat'
+import checkExistingChat from '../../service/checkExistingChat'
+import ProfilePicture from '../ProfilePicture'
 
-export default function ChatItem({ item }) {
+export default function SidebarChatItem({ item }) {
     const userState = useSelector(state => state.user.value)
     const chatState = useSelector(state => state.chat.value)
     const dispatch = useDispatch()
@@ -37,7 +37,7 @@ export default function ChatItem({ item }) {
             onKeyDown={(e) => { if (e.key === 'Enter') handleClick() }}
         >
             <div className="sidebar__chats-avatar">
-                <Avatar name={`${item.firstName}-${item.uid}`} size={50} />
+                <ProfilePicture user={item} size={50} />
             </div>
             <div className="sidebar__chats-content">
                 <div className="sidebar__content-top">

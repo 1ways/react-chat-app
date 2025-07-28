@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import ChatItem from './ChatItem'
-import getChatList from '../service/getChatList'
+import ChatItem from './SidebarChatItem'
+import getChatList from '../../service/getChatList'
 
-export default function ChatList() {
+export default function SidebarChatList() {
     const userState = useSelector(state => state.user.value)
     const [chats, setChats] = useState(null)
 

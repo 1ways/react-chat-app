@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { child, get, ref } from 'firebase/database'
 import { auth, db } from '../firebaseConfig'
-import { update, setIsLoading } from './state/user/userSlice'
+import { updateUser, setIsLoading } from './state/user/userSlice'
 
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -22,7 +22,7 @@ export default function App() {
                 const snapshot = await get(child(dbRef, `users/${user.uid}`))
 
                 if (!userState) {
-                    dispatch(update(snapshot.val()))
+                    dispatch(updateUser(snapshot.val()))
                 }
             } else {
                 dispatch(update(null))

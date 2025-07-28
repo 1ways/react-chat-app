@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import SearchBar from './SearchBar'
-import ChatItem from './ChatItem'
-import ChatList from './ChatList'
+import SidebarSearchBar from './SidebarSearchBar'
+import SidebarChatItem from './SidebarChatItem'
+import SidebarChatList from './SidebarChatList'
+import SidebarFooter from './SidebarFooter'
 
 export default function ChatSidebar() {
     const [isSearching, setIsSearching] = useState(false)
@@ -11,14 +12,14 @@ export default function ChatSidebar() {
     return (
         <div className="sidebar">
             <div className="sidebar__search">
-                <SearchBar setResult={setResult} setSearchText={setSearchText} setIsSearching={setIsSearching} />
+                <SidebarSearchBar setResult={setResult} setSearchText={setSearchText} setIsSearching={setIsSearching} />
             </div>
             <ul className="sidebar__chats">
                 {isSearching ? (
                     <>
                         {result ?
                             Object.values(result).map(item => (
-                                <ChatItem key={item.uid} item={item} setSearchText={setSearchText} />
+                                <SidebarChatItem key={item.uid} item={item} setSearchText={setSearchText} />
                             )) :
                             null
                         }
@@ -26,9 +27,10 @@ export default function ChatSidebar() {
                             <p className='sidebar__text'>{searchText}</p> : null
                         }
                     </>
-                ) : <ChatList />
+                ) : <SidebarChatList />
                 }
             </ul>
+            <SidebarFooter />
         </div>
     )
 }
